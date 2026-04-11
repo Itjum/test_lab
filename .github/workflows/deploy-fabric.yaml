@@ -9,7 +9,7 @@ permissions:
   pull-requests: write
 
 env:
-  TF_WORKING_DIR: src/tf/lab/2-setup-ms-fabric
+  TF_WORKING_DIR: terraform/
   ARM_CLIENT_ID: ${{ secrets.SPN_CLIENT_ID }}
   ARM_CLIENT_SECRET: ${{ secrets.SPN_CLIENT_SECRET }}
   ARM_TENANT_ID: ${{ secrets.SPN_TENANT_ID }}
@@ -40,7 +40,6 @@ jobs:
       - name: Terraform Init
         working-directory: ${{ env.TF_WORKING_DIR }}
         run: |
-          cd terraform
           terraform init \
             -backend-config="key=backend_dev.tfstate"
 
