@@ -2,10 +2,10 @@ terraform {
   required_version = ">= 1.8"
 
   backend "azurerm" {
-    resource_group_name   = "rg-hands-on-introduction-to-dataops"
-    storage_account_name  = "handsondataopsbackend"
-    container_name        = "sam-backend"
-    key                   = "terraform.tfstate"
+    resource_group_name  = "rg-hands-on-introduction-to-dataops"
+    storage_account_name = "handsondataopsbackend"
+    container_name       = "sam-backend"
+    key                  = "terraform.tfstate"
   }
 
   required_providers {
