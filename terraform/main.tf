@@ -50,7 +50,7 @@ resource "fabric_workspace_role_assignment" "dev" {
   workspace_id = fabric_workspace.dev.id
 
   principal = {
-    id   = "cd76f376-e762-47e8-b795-a05d40e61f67"
+    id   = "cd76f376-e762-47e8-b795-a05d40e61f67" # grp-hands-on-introduction-to-dataops
     type = "Group"
   }
 
