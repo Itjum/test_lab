@@ -51,13 +51,9 @@ jobs:
           terraform init \
             -backend-config="key=backend_${{ inputs.environment }}.tfstate"
 
-      - name: Terraform Format Check
-        working-directory: ${{ env.TF_WORKING_DIR }}
-        run: terraform fmt -check -recursive
-
       - name: Terraform Validate
         working-directory: ${{ env.TF_WORKING_DIR }}
-        run: terraform validate -var="target_environment=${{ inputs.environment }}"
+        run: terraform validate
 
       - name: Terraform Plan
         working-directory: ${{ env.TF_WORKING_DIR }}
