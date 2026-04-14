@@ -5,7 +5,7 @@ terraform {
     resource_group_name  = "rg-hands-on-introduction-to-dataops"
     storage_account_name = "handsondataopsbackend"
     container_name       = "sam-backend"
-    key                  = "terraform.tfstate"
+    key                  = "sam.tfstate"
   }
 
   required_providers {
@@ -24,16 +24,6 @@ terraform {
 provider "azurerm" {
   subscription_id = "0864cee4-2d12-4a41-b878-50f960ea5139"
   features {}
-}
-
-resource "fabric_workspace" "dev" {
-  display_name = "[HANDS-ON] SAM Workspace - DEV"
-  description  = "Fabric workspace for the Introduction to DataOps learning path."
-  capacity_id  = "d38db894-91ed-4915-901d-3d229662e961"
-
-  identity = {
-    type = "SystemAssigned"
-  }
 }
 
 module "fabric_env_dev" {
