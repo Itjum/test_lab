@@ -43,6 +43,16 @@ jobs:
             -p ${{ secrets.SPN_CLIENT_SECRET }} \
             --tenant ${{ secrets.SPN_TENANT_ID }}
 
+      - name: Debug - List workspaces and source files
+        run: |
+          echo "=== Workspace name: '${{ steps.workspace.outputs.name }}' ==="
+          echo "=== Listing accessible workspaces ==="
+          fab ls / || true
+          echo "=== Listing workspace contents ==="
+          fab ls "/${{ steps.workspace.outputs.name }}.Workspace/" || true
+          echo "=== Local source files ==="
+          find src/fabric/nb_demo.Notebook -type f 2>/dev/null || echo "Source directory not found"
+
       - name: Deploy Fabric Items
         run: |
           lakehouse_name="lkh_${{ inputs.environment }}_hands_on"
