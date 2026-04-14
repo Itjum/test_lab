@@ -5,6 +5,7 @@
     "displayName": "nb_demo"
   },
   "config": {
-    "version": "2.0"
+    "version": "2.0",
+    "logicalId": "99648fbc-1c13-9fa5-4e37-0f48be263a47"
   }
 }
