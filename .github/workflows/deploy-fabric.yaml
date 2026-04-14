@@ -27,7 +27,6 @@ jobs:
   terraform-plan:
     name: Terraform Plan (${{ inputs.environment }})
     runs-on: ubuntu-latest
-    environment: ${{ inputs.environment }}
 
     steps:
       - name: Checkout repository
@@ -58,11 +57,11 @@ jobs:
 
       - name: Terraform Validate
         working-directory: ${{ env.TF_WORKING_DIR }}
-        run: terraform validate
+        run: terraform validate -var="target_environment=${{ inputs.environment }}"
 
       - name: Terraform Plan
         working-directory: ${{ env.TF_WORKING_DIR }}
-        run: terraform plan -out=tfplan -input=false
+        run: terraform plan -var="target_environment=${{ inputs.environment }}" -out=tfplan -input=false
 
       - name: Upload Terraform Plan
         uses: actions/upload-artifact@v4
