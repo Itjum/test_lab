@@ -36,23 +36,11 @@ resource "fabric_workspace" "dev" {
   }
 }
 
-resource "fabric_lakehouse" "dev" {
-  display_name = "lkh_dev_hands_on"
-  workspace_id = fabric_workspace.dev.id
-  description  = "Fabric lakehouse for the Introduction to DataOps learning path."
+module "fabric_env_dev" {
+  source = "./modules/fabric-environment"
 
-  configuration = {
-    enable_schemas = true
-  }
-}
-
-resource "fabric_workspace_role_assignment" "dev" {
-  workspace_id = fabric_workspace.dev.id
-
-  principal = {
-    id   = "cd76f376-e762-47e8-b795-a05d40e61f67" # grp-hands-on-introduction-to-dataops
-    type = "Group"
-  }
-
-  role = "Contributor"
+  environment  = "DEV"
+  trigram      = "SAM"
+  capacity_id  = "d38db894-91ed-4915-901d-3d229662e961"
+  principal_id = "cd76f376-e762-47e8-b795-a05d40e61f67"
 }
