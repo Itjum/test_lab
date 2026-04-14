@@ -5,7 +5,7 @@ terraform {
     resource_group_name  = "rg-hands-on-introduction-to-dataops"
     storage_account_name = "handsondataopsbackend"
     container_name       = "sam-backend"
-    key                  = "sam.tfstate"
+    key                  = "backend_dev.tfstate"
   }
 
   required_providers {
@@ -26,10 +26,20 @@ provider "azurerm" {
   features {}
 }
 
-module "fabric_env_dev" {
+variable "target_environment" {
+  description = "The environment to deploy (dev or prd)"
+  type        = string
+
+  validation {
+    condition     = contains(["dev", "prd"], var.target_environment)
+    error_message = "target_environment must be 'dev' or 'prd'."
+  }
+}
+
+module "fabric_env" {
   source = "./modules/fabric-environment"
 
-  environment  = "DEV"
+  environment  = upper(var.target_environment)
   trigram      = "SAM"
   capacity_id  = "d38db894-91ed-4915-901d-3d229662e961"
   principal_id = "cd76f376-e762-47e8-b795-a05d40e61f67"
